@@ -44,7 +44,7 @@
       socket.emit("update", {
         messages: "1"
       });
-      return response.send(request.body);
+      return response.redirect('/');
     });
     return socket.on("my other event", function(data) {
       return console.log(data);

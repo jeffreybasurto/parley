@@ -40,6 +40,6 @@ io.sockets.on "connection", (socket) ->
     #redis.get "messages", (err, val)->
       #socket.emit "update", messages: val 
     socket.emit "update", messages: "1"
-    response.send request.body
+    response.redirect('/');
   socket.on "my other event", (data) ->
     console.log data
