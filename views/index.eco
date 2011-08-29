@@ -11,16 +11,12 @@
         $("#messages-sent").text(data["messages"]);
       });
     </script>
-    
-    <style type="text/css">
- 
-    </style>
     <title></title>
   </head>
   <body>
-    <div id="messages-container">
-      <div id="messages-sent"><%= @messages %></div> 
-      <p>messages<br>delivered</p>
-    </div>
+      <div id="messages-container">
+        <div id="messages-sent"><%= @messages %></div> 
+        <p>messages<br>delivered</p>
+      </div>
   </body>
 </html>

@@ -1,0 +1,43 @@
+#messages-container {
+   overflow: hidden;
+   -moz-border-radius: 50px;
+   -webkit-border-radius: 50px;
+   -o-border-radius: 50px;
+   -ms-border-radius: 50px;
+   -khtml-border-radius: 50px;
+   border-radius: 50px;
+   background: white;
+   background: -moz-linear-gradient(top, white, #DDD);
+   background: -ms-linear-gradient(top, white, #DDD);
+   background: -o-linear-gradient(top, white, #DDD);
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #DDD));
+   background: -webkit-linear-gradient(top, white, #DDD);
+   background: linear-gradient(top, white, #DDD);
+   border: 1px solid #CCC;
+   font-family: "VAG Rundschrift Regular", "Helvetica Neue", sans-serif;
+   padding: 5px 30px;
+   padding-bottom: 11px;
+   margin-bottom: 20px;
+   display: inline-block;
+}
+#messages-container p {
+  float: right;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9em;
+  padding-top: 8px;
+  font-style: normal;
+  color: #BBB;
+  text-transform: uppercase;
+  line-height: 1.1;
+  padding-left: 10px;
+}
+#messages-sent {
+  float: left;
+  font-size: 2.4em;
+  padding: 0;
+}
+
+body {
+  background-image: url(http://pusher.com/stylesheets/images/home_banner_bg.png);
+}

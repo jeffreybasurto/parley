@@ -1,0 +1,3 @@
+<form name="test" action="message" method="post">
+  <input type="submit" name="submit" class="button" id="submit_btn" value="Post Test Message">
+</form>
