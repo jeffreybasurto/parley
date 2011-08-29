@@ -42,7 +42,6 @@ app.post "/message", (request, response) ->
   # we could add the value to a redis queue @ the key for another app to consume.
   # but for simplicty for now let's just act upon it.
   if socket_list[request.body.key]
-    redis.incrby("messages", socket_list[request.body.key].length())
     sock.emit("update", messages: request.body.message) for sock in socket_list[request.body.key]
   else
     console.log("No socket list for key:" + request.body.key)
