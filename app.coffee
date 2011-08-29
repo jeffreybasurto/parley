@@ -39,7 +39,7 @@ app.get '/challenge/:channel', (request, response) ->
 app.post "/message", (request, response) ->
   redis.incr("messages")
   redis.get "messages", (err, val)->
-    sock.emit "update", messages: addCommas(parseInt(val) + 1000) for sock in socket_list
+    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list
   response.send("true")
   
 io = require("socket.io").listen(app)

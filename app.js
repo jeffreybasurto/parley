@@ -51,18 +51,15 @@
   app.post("/message", function(request, response) {
     redis.incr("messages");
     redis.get("messages", function(err, val) {
-      var sock;
-      return sock.emit("update", {
-        messages: (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = socket_list.length; _i < _len; _i++) {
-            sock = socket_list[_i];
-            _results.push(addCommas(parseInt(val) + 1000));
-          }
-          return _results;
-        })()
-      });
+      var sock, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = socket_list.length; _i < _len; _i++) {
+        sock = socket_list[_i];
+        _results.push(sock.emit("update", {
+          messages: addCommas(parseInt(val) + 1000)
+        }));
+      }
+      return _results;
     });
     return response.send("true");
   });
