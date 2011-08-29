@@ -27,6 +27,10 @@ app.get '/', (request, response) ->
 
 app.get '/test', (request, response) ->
   response.render 'test'
+
+app.get '/challenge/:channel', (request, response) ->
+  chan = request.params.channel
+  response.render 'challenge', { chan }
   
 io = require("socket.io").listen(app)
 fs = require("fs")

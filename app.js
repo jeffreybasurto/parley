@@ -33,6 +33,13 @@
   app.get('/test', function(request, response) {
     return response.render('test');
   });
+  app.get('/challenge/:channel', function(request, response) {
+    var chan;
+    chan = request.params.channel;
+    return response.render('challenge', {
+      chan: chan
+    });
+  });
   io = require("socket.io").listen(app);
   fs = require("fs");
   io.configure(function() {
