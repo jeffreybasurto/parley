@@ -1,7 +1,7 @@
 handler = (req, res) ->
   fs.readFile __dirname + "/index.html", (err, data) ->
     if err
-      res.writeHead 500
+      return res.writeHead 500
       return res.end("Error loading index.html")
     res.writeHead 200
     res.end data
@@ -10,7 +10,9 @@ app = require("http").createServer(handler)
 io = require("socket.io").listen(app)
 fs = require("fs")
 
-app.listen 1337
+port = process.env.PORT || 1337;
+app.listen port, () -> 
+  console.log("Listening on " + port);
 
 io.sockets.on "connection", (socket) ->
   socket.emit "news", hello: "world"
