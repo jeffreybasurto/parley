@@ -36,10 +36,10 @@ app.listen port, () ->
 
 io.sockets.on "connection", (socket) ->
   app.post "/message", (request, response) ->
-    redis.incr("messages")
-    redis.get "messages", (err, val)->
-      socket.emit "update", messages: val 
-
+    #redis.incr("messages")
+    #redis.get "messages", (err, val)->
+      #socket.emit "update", messages: val 
+    socket.emit "update", messages: "1"
     response.send request.body
   socket.on "my other event", (data) ->
     console.log data

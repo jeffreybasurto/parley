@@ -28,22 +28,6 @@
     });
   });
   app.get('/test', function(request, response) {
-    var options, req;
-    options = {
-      host: "http://freezing-mist-544.herokuapp.com",
-      port: port,
-      path: '/message',
-      method: 'POST'
-    };
-    req = http.request(options, function(res) {
-      res.setEncoding('utf8');
-      return res.on('data', function(chunk) {
-        return console.log('BODY: ' + chunk);
-      });
-    });
-    req.write('data\n');
-    req.write('data\n');
-    req.end();
     return response.send("Message sent.");
   });
   io = require("socket.io").listen(app);
@@ -57,11 +41,8 @@
   });
   io.sockets.on("connection", function(socket) {
     app.post("/message", function(request, response) {
-      redis.incr("messages");
-      redis.get("messages", function(err, val) {
-        return socket.emit("update", {
-          messages: val
-        });
+      socket.emit("update", {
+        messages: "1"
       });
       return response.send(request.body);
     });
