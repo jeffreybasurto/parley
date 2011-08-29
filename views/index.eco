@@ -57,10 +57,9 @@
     <div id="messages-container">
       <span id="messages-sent"><%= @messages %></span> 
       <p>messages<br>delivered</p>
-      
-      <form name="test" action="messages" method="post">
-        <input type="submit" name="submit" class="button" id="submit_btn" value="Send"></input>  
-      </form>
     </div>
+    <form name="test" action="message" method="post">
+      <input type="submit" name="submit" class="button" id="submit_btn" value="Send"></input>  
+    </form>
   </body>
 </html>
