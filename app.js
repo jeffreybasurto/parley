@@ -1,11 +1,5 @@
 (function() {
   var addCommas, app, express, fs, http, io, port, redis, rtg, socket_list;
-  Array.prototype.remove = function(e) {
-    var t, _ref;
-    if ((t = this.indexOf(e)) > -1) {
-      return ([].splice.apply(this, [t, t - t + 1].concat(_ref = [])), _ref);
-    }
-  };
   addCommas = function(number) {
     return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
   };

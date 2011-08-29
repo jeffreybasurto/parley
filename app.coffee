@@ -1,5 +1,3 @@
-Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
-
 addCommas = (number) ->
   return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")
 
