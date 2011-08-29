@@ -39,7 +39,7 @@ app.get '/challenge/:channel', (request, response) ->
   response.render 'challenge', { chan }
   
 app.post "/message", (request, response) ->
-  redis.incr("messages")
+  redis.incrby("messages", 2) # counting message we're delivering to web page that subs all messages.
   redis.get "messages", (err, val)->
     sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in (socket_list["1"] || [])    
   # we could add the value to a redis queue @ the key for another app to consume.
