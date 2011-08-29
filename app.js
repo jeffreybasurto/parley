@@ -14,6 +14,7 @@
   port = process.env.PORT || 1337;
   app = express.createServer(express.logger());
   socket_list = {};
+  app.use(express.bodyParser());
   if (process.env.REDISTOGO_URL) {
     rtg = require("url").parse(process.env.REDISTOGO_URL);
     redis = require("redis").createClient(rtg.port, rtg.hostname);
@@ -49,7 +50,7 @@
     });
   });
   app.post("/message", function(request, response) {
-    console.log(request);
+    console.log(request.body);
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;

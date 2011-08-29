@@ -9,6 +9,8 @@ port = process.env.PORT || 1337;
 app = express.createServer express.logger()
 socket_list = {}
 
+app.use(express.bodyParser());
+
 if (process.env.REDISTOGO_URL) 
   rtg   = require("url").parse(process.env.REDISTOGO_URL)
   redis = require("redis").createClient(rtg.port, rtg.hostname)
@@ -37,7 +39,7 @@ app.get '/challenge/:channel', (request, response) ->
   response.render 'challenge', { chan }
   
 app.post "/message", (request, response) ->
-  console.log(request)
+  console.log(request.body)
   redis.incr("messages")
   redis.get "messages", (err, val)->
     sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
