@@ -3,6 +3,7 @@
   express = require('express');
   http = require('http');
   port = process.env.PORT || 1337;
+  console.log(process.env);
   app = express.createServer(express.logger());
   if (process.env.REDISTOGO_URL) {
     rtg = require("url").parse(process.env.REDISTOGO_URL);
@@ -29,7 +30,7 @@
   app.get('/test', function(request, response) {
     var options, req;
     options = {
-      host: 'localhost',
+      host: process.env.HOST || "localhost",
       port: port,
       path: '/message',
       method: 'POST'
