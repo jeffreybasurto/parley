@@ -48,7 +48,7 @@
   });
   app.post("/message", function(request, response) {
     var sock, _i, _len, _ref;
-    redis.incrby("messages", 2);
+    redis.incrby("messages", 1 + (socket_list["1"] || []).length());
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
       _ref = socket_list["1"] || [];
@@ -62,6 +62,7 @@
       return _results;
     });
     if (socket_list[request.body.key]) {
+      redis.incrby("messages", socket_list[request.body.key].length());
       _ref = socket_list[request.body.key];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         sock = _ref[_i];
