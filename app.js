@@ -3,8 +3,8 @@
   express = require('express');
   http = require('http');
   port = process.env.PORT || 1337;
-  console.log(process.env);
   app = express.createServer(express.logger());
+  console.log(process.env);
   if (process.env.REDISTOGO_URL) {
     rtg = require("url").parse(process.env.REDISTOGO_URL);
     redis = require("redis").createClient(rtg.port, rtg.hostname);
