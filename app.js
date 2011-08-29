@@ -35,6 +35,7 @@
   });
   app.get('/challenge/:channel', function(request, response) {
     var chan;
+    console.log("Challenge route hit");
     chan = request.params.channel;
     return response.render('challenge', {
       chan: chan

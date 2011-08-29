@@ -29,6 +29,7 @@ app.get '/test', (request, response) ->
   response.render 'test'
 
 app.get '/challenge/:channel', (request, response) ->
+  console.log("Challenge route hit")
   chan = request.params.channel
   response.render 'challenge', { chan }
   
