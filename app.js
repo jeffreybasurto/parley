@@ -72,6 +72,8 @@
           messages: request.body.message
         });
       }
+    } else {
+      console.log("No socket list for key:" + request.body.key);
     }
     return response.send("true");
   });
