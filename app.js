@@ -61,16 +61,12 @@
       }
       return _results;
     });
-    if (socket_list[request.body.key]) {
-      _ref = socket_list[request.body.key];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        sock = _ref[_i];
-        sock.emit("update", {
-          messages: request.body.message
-        });
-      }
-    } else {
-      console.log("No socket list for key:" + request.body.key);
+    _ref = socket_list[request.body.key] || [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      sock = _ref[_i];
+      sock.emit("update", {
+        messages: request.body.message
+      });
     }
     return response.send("true");
   });

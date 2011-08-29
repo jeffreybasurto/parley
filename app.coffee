@@ -41,11 +41,7 @@ app.post "/message", (request, response) ->
     sock.emit("update", messages: parseInt(val)) for sock in (socket_list["1"] || [])    
   # we could add the value to a redis queue @ the key for another app to consume.
   # but for simplicty for now let's just act upon it.
-  if socket_list[request.body.key]
-    sock.emit("update", messages: request.body.message) for sock in socket_list[request.body.key]
-  else
-    console.log("No socket list for key:" + request.body.key)
-    
+  sock.emit("update", messages: request.body.message) for sock in (socket_list[request.body.key] || [])    
   response.send("true")
   
 io = require("socket.io").listen(app)
