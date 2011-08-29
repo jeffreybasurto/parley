@@ -13,7 +13,9 @@
         };
         var $messages = $("#messages-sent");
         var socket = io.connect(window.location.hostname);
-        var throttled = _.throttle(function(value) {$messages.text(addCommas(value);}, 100);
+        var throttled = _.throttle(function(value) {
+          $messages.text(addCommas(value));
+        }, 100);
         
         socket.emit("challenge", {"key": "1"});
         socket.on('update', function (data) {
