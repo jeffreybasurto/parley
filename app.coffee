@@ -69,10 +69,14 @@ io.sockets.on "connection", (socket) ->
     socket_list[key] = [] unless socket_list[data["key"]] 
     socket_list[key].push socket
     # subscript to a specific group. 
-    console.log("Challenge for key:" + key);
-    socket.emit "challenge", {response: "1"}
+    console.log("Challenge for key:" + key)
+    socket.set 'key', key,  () -> socket.emit "challenge", {response: "1"}
     
   socket.on 'disconnect', () ->
+    console.log ("disconnecting socket.")
+    socket.get 'key', (err, key) -> socket_list[key].remove(socket)
+
+    
    # socket_list.remove socket
         
         

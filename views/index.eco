@@ -18,9 +18,10 @@
     <div class="column">
       <h1>
          Add <b>realtime</b> events to your app
+         
       </h1>
       <p>
-        Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via real-time technology to web and mobile apps.
+        Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via web technology to desktop and mobile apps.
       </p>
       <div id="messages-container">
         <div id="messages-sent">
