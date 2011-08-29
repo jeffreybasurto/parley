@@ -43,9 +43,7 @@ io.configure () ->
 app.listen port, () -> 
   console.log("Listening on " + port);
 
-io.sockets.on "connection", (socket) ->
-  socket.emit("challenge", {response: 1})
-  
+io.sockets.on "connection", (socket) ->  
   app.post "/message", (request, response) ->
     redis.incr("messages")
     redis.get "messages", (err, val)->

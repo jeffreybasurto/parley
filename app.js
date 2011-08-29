@@ -51,9 +51,6 @@
     return console.log("Listening on " + port);
   });
   io.sockets.on("connection", function(socket) {
-    socket.emit("challenge", {
-      response: 1
-    });
     app.post("/message", function(request, response) {
       redis.incr("messages");
       redis.get("messages", function(err, val) {
