@@ -6,9 +6,15 @@ handler = (req, res) ->
     res.writeHead 200
     res.end data
 
+
+
 app = require("http").createServer(handler)
 io = require("socket.io").listen(app)
 fs = require("fs")
+
+io.configure () ->  
+  io.set "transports", ["xhr-polling"] 
+  io.set "polling duration", 10
 
 port = process.env.PORT || 1337;
 app.listen port, () -> 

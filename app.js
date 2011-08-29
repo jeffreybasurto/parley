@@ -13,6 +13,10 @@
   app = require("http").createServer(handler);
   io = require("socket.io").listen(app);
   fs = require("fs");
+  io.configure(function() {
+    io.set("transports", ["xhr-polling"]);
+    return io.set("polling duration", 10);
+  });
   port = process.env.PORT || 1337;
   app.listen(port, function() {
     return console.log("Listening on " + port);
