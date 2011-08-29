@@ -50,7 +50,7 @@
     });
   });
   app.post("/message", function(request, response) {
-    console.log(request.params);
+    console.log(request.body.test);
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
