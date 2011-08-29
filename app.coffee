@@ -41,8 +41,7 @@ app.get '/challenge/:channel', (request, response) ->
 app.post "/message", (request, response) ->
   redis.incr("messages")
   redis.get "messages", (err, val)->
-    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
-    
+    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in (socket_list["1"] || [])    
   # we could add the value to a redis queue @ the key for another app to consume.
   # but for simplicty for now let's just act upon it.
   if socket_list[request.body.key]
