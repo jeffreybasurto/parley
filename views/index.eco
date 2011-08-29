@@ -2,12 +2,11 @@
 <html>
   <head>
     <link rel="StyleSheet" href="style.css" type="text/css" media="screen">
-    <script src="/socket.io/socket.io.js" type="text/javascript">
-</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript">
-</script>
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-var socket = io.connect(window.location.hostname);
+      var socket = io.connect(window.location.hostname);
+      socket.emit("challenge", {"key": "1"});
       socket.on('update', function (data) {
         console.log("update received");
         $("#messages-sent").text(data["messages"]);
