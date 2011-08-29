@@ -52,7 +52,10 @@
       });
       return response.redirect('/test');
     });
-    return socket.on("my other event", function(data) {
+    return socket.on("challenge", function(data) {
+      socket.emit("challenge", {
+        response: 1
+      });
       return console.log(data);
     });
   });
