@@ -52,4 +52,4 @@ io.sockets.on "connection", (socket) ->
   # challenge should happen when a new user is connecting to an existing apps channel.
   socket.on "challenge", (data) ->
     socket.emit "challenge", {response: 1}
-    console.log data
+    

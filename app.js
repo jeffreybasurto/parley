@@ -61,10 +61,9 @@
       return response.redirect('/test');
     });
     return socket.on("challenge", function(data) {
-      socket.emit("challenge", {
+      return socket.emit("challenge", {
         response: 1
       });
-      return console.log(data);
     });
   });
 }).call(this);
