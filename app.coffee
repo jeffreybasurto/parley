@@ -36,7 +36,8 @@ app.listen port, () ->
 
 io.sockets.on "connection", (socket) ->
   app.post "/message", (request, response) ->
-    #redis.incr("messages")
+    console.log("Got here---------------!!!!")
+    redis.incr("messages")
     #redis.get "messages", (err, val)->
       #socket.emit "update", messages: val 
     socket.emit "update", messages: "1"

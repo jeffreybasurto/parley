@@ -41,6 +41,8 @@
   });
   io.sockets.on("connection", function(socket) {
     app.post("/message", function(request, response) {
+      console.log("Got here---------------!!!!");
+      redis.incr("messages");
       socket.emit("update", {
         messages: "1"
       });
