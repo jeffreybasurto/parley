@@ -2,8 +2,12 @@
   var app, express, fs, io, port;
   express = require('express');
   app = express.createServer(express.logger());
+  app.set('view engine', 'eco');
+  app.set('view options', {
+    layout: false
+  });
   app.get('/', function(request, response) {
-    return response.send('Hello World!');
+    return response.render('index');
   });
   io = require("socket.io").listen(app);
   fs = require("fs");

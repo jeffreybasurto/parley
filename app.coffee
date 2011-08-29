@@ -2,6 +2,8 @@ express = require 'express'
 app = express.createServer express.logger()
 
 app.set 'view engine', 'eco'
+app.set 'view options', { layout: false }
+
 
 app.get '/', (request, response) -> 
   response.render 'index'
