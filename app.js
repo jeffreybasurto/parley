@@ -58,7 +58,7 @@
           messages: addCommas(parseInt(val) + 1000)
         });
       });
-      return response.redirect('/test');
+      return response.send("true");
     });
     return socket.on("challenge", function(data) {
       return socket.emit("challenge", {

@@ -48,7 +48,7 @@ io.sockets.on "connection", (socket) ->
     redis.incr("messages")
     redis.get "messages", (err, val)->
       socket.emit "update", messages: addCommas(parseInt(val) + 1000)
-    response.redirect('/test');
+    response.send("true")
   # challenge should happen when a new user is connecting to an existing apps channel.
   socket.on "challenge", (data) ->
     socket.emit "challenge", {response: 1}
