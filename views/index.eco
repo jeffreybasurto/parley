@@ -12,6 +12,7 @@
           return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
         };
         var $messages = $("#messages-sent");
+        $messages.text(addCommas($messages.text()));
         var socket = io.connect(window.location.hostname);
         var throttled = _.throttle(function(value) {
           $messages.text(addCommas(value));
