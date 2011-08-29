@@ -1,10 +1,12 @@
 (function() {
-  var app, express, fs, http, io, port, redis, rtg;
+  var addCommas, app, express, fs, http, io, port, redis, rtg;
+  addCommas = function(number) {
+    return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
+  };
   express = require('express');
   http = require('http');
   port = process.env.PORT || 1337;
   app = express.createServer(express.logger());
-  console.log(process.env);
   if (process.env.REDISTOGO_URL) {
     rtg = require("url").parse(process.env.REDISTOGO_URL);
     redis = require("redis").createClient(rtg.port, rtg.hostname);
@@ -19,16 +21,17 @@
   app.set('view options', {
     layout: false
   });
+  app.use(express.static(__dirname + '/public'));
   app.get('/', function(request, response) {
     return redis.get("messages", function(err, messages) {
-      console.log(messages);
+      messages = addCommas(parseInt(messages) + 1000);
       return response.render('index', {
         messages: messages
       });
     });
   });
   app.get('/test', function(request, response) {
-    return response.send("Message sent.");
+    return response.render('test');
   });
   io = require("socket.io").listen(app);
   fs = require("fs");
@@ -44,7 +47,7 @@
       redis.incr("messages");
       redis.get("messages", function(err, val) {
         return socket.emit("update", {
-          messages: val
+          messages: addCommas(parseInt(val) + 1000)
         });
       });
       return response.redirect('/test');
