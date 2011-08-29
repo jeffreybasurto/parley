@@ -77,13 +77,10 @@
   });
   io.sockets.on("connection", function(socket) {
     socket_list.push(socket);
-    socket.on("challenge", function(data) {
+    return socket.on("challenge", function(data) {
       return socket.emit("challenge", {
         response: 1
       });
-    });
-    return socket.on('disconnect', function() {
-      return socket_list.remove(socket);
     });
   });
 }).call(this);

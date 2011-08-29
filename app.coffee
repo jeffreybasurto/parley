@@ -58,7 +58,7 @@ io.sockets.on "connection", (socket) ->
   socket.on "challenge", (data) ->
     socket.emit "challenge", {response: 1}
     
-  socket.on 'disconnect', () ->
-    socket_list.remove socket
+  #socket.on 'disconnect', () ->
+   # socket_list.remove socket
         
         
