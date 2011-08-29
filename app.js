@@ -30,7 +30,7 @@
   app.get('/test', function(request, response) {
     var options, req;
     options = {
-      host: process.env.HOST || "localhost",
+      host: "localhost",
       port: port,
       path: '/message',
       method: 'POST'

@@ -23,7 +23,7 @@ app.get '/', (request, response) ->
 
 app.get '/test', (request, response) ->
   options = {
-    host: process.env.HOST || "localhost",
+    host: "localhost",
     port: port,
     path: '/message',
     method: 'POST'
