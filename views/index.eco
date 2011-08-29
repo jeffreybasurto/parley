@@ -1,12 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
   <head>
-    <link rel=StyleSheet href="style.css" type="text/css" media=screen>
-    
-    <script src="/socket.io/socket.io.js" type="text/javascript"> </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+    <link rel="StyleSheet" href="style.css" type="text/css" media="screen">
+    <script src="/socket.io/socket.io.js" type="text/javascript">
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript">
+</script>
     <script type="text/javascript">
-      var socket = io.connect(window.location.hostname);
+var socket = io.connect(window.location.hostname);
       socket.on('update', function (data) {
         $("#messages-sent").text(data["messages"]);
       });
@@ -14,9 +15,22 @@
     <title></title>
   </head>
   <body>
+    <div class="column">
+      <h1>
+         Add <b>realtime</b> events to your app
+      </h1>
+      <p>
+        Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via real-time technology to web and mobile apps.
+      </p>
       <div id="messages-container">
-        <div id="messages-sent"><%= @messages %></div> 
-        <p>messages<br>delivered</p>
+        <div id="messages-sent">
+          <%= @messages %>
+        </div>
+        <p>
+          messages<br>
+          delivered
+        </p>
       </div>
+    </div>
   </body>
 </html>
