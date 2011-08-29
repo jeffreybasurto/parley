@@ -3,6 +3,7 @@
   <head>
     <link rel="StyleSheet" href="style.css" type="text/css" media="screen">
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function() {
@@ -12,9 +13,11 @@
         };
         var $messages = $("#messages-sent");
         var socket = io.connect(window.location.hostname);
+        var throttled = _.throttle(function(value) {$messages.text(addCommas(value);}, 100);
+        
         socket.emit("challenge", {"key": "1"});
         socket.on('update', function (data) {
-          $messages.text(addCommas(data["messages"]));
+          throttled(data["messages"]);
         });
       });
     </script>
