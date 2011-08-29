@@ -23,7 +23,7 @@ app.get '/', (request, response) ->
 
 app.get '/test', (request, response) ->
   options = {
-    host: "localhost",
+    host: "http://freezing-mist-544.herokuapp.com/",
     port: port,
     path: '/message',
     method: 'POST'
