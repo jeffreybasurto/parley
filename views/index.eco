@@ -59,7 +59,7 @@
       <p>messages<br>delivered</p>
     </div>
     <form name="test" action="message" method="post">
-      <input type="submit" name="submit" class="button" id="submit_btn" value="Send"></input>  
+      <input type="submit" name="submit" class="button" id="submit_btn" value="Send">post test message</input>  
     </form>
   </body>
 </html>

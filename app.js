@@ -41,10 +41,11 @@
   });
   io.sockets.on("connection", function(socket) {
     app.post("/message", function(request, response) {
-      console.log("Got here---------------!!!!");
       redis.incr("messages");
-      socket.emit("update", {
-        messages: "1"
+      redis.get("messages", function(err, val) {
+        return socket.emit("update", {
+          messages: val
+        });
       });
       return response.redirect('/');
     });
