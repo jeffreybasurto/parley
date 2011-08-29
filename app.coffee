@@ -7,7 +7,7 @@ express = require 'express'
 http = require 'http'
 port = process.env.PORT || 1337;
 app = express.createServer express.logger()
-socket_list = []
+socket_list = {}
 
 if (process.env.REDISTOGO_URL) 
   rtg   = require("url").parse(process.env.REDISTOGO_URL)
@@ -39,7 +39,7 @@ app.get '/challenge/:channel', (request, response) ->
 app.post "/message", (request, response) ->
   redis.incr("messages")
   redis.get "messages", (err, val)->
-    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list
+    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
   response.send("true")
   
 io = require("socket.io").listen(app)
@@ -53,9 +53,13 @@ app.listen port, () ->
   console.log("Listening on " + port);
 
 io.sockets.on "connection", (socket) ->  
-  socket_list.push socket
   # challenge should happen when a new user is connecting to an existing apps channel.
   socket.on "challenge", (data) ->
+    key = data["key"]
+    socket_list[key] = [] unless socket_list[data["key"]] 
+    socket_list[key].push socket
+    # subscript to a specific group. 
+    
     socket.emit "challenge", {response: 1}
     
   #socket.on 'disconnect', () ->
