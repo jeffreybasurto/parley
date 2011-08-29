@@ -61,7 +61,7 @@ io.sockets.on "connection", (socket) ->
     socket_list[key].push socket
     # subscript to a specific group. 
     
-    socket.emit "challenge", {response: 1}
+    socket.emit "challenge", {response: "1"}
     
   #socket.on 'disconnect', () ->
    # socket_list.remove socket

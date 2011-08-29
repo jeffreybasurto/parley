@@ -83,7 +83,7 @@
       }
       socket_list[key].push(socket);
       return socket.emit("challenge", {
-        response: 1
+        response: "1"
       });
     });
   });
