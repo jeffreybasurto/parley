@@ -104,7 +104,9 @@
     return socket.on('disconnect', function() {
       console.log("disconnecting socket.");
       return socket.get('key', function(err, key) {
-        return socket_list[key].remove(socket);
+        if (key && socket_list[key]) {
+          return socket_list[key].remove(socket);
+        }
       });
     });
   });
