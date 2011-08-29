@@ -1,3 +1,5 @@
+Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
+
 addCommas = (number) ->
   return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")
 
@@ -35,10 +37,10 @@ app.get '/challenge/:channel', (request, response) ->
   response.render 'challenge', { chan }
   
 app.post "/message", (request, response) ->
+  console.log(request)
   redis.incr("messages")
   redis.get "messages", (err, val)->
-    if socket_list["1"]
-      sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
+    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
   response.send("true")
   
 io = require("socket.io").listen(app)
@@ -61,7 +63,7 @@ io.sockets.on "connection", (socket) ->
     
     socket.emit "challenge", {response: "1"}
     
-  #socket.on 'disconnect', () ->
+  socket.on 'disconnect', () ->
    # socket_list.remove socket
         
         

@@ -1,5 +1,11 @@
 (function() {
   var addCommas, app, express, fs, http, io, port, redis, rtg, socket_list;
+  Array.prototype.remove = function(e) {
+    var t, _ref;
+    if ((t = this.indexOf(e)) > -1) {
+      return ([].splice.apply(this, [t, t - t + 1].concat(_ref = [])), _ref);
+    }
+  };
   addCommas = function(number) {
     return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
   };
@@ -43,20 +49,19 @@
     });
   });
   app.post("/message", function(request, response) {
+    console.log(request);
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
-      if (socket_list["1"]) {
-        _ref = socket_list["1"];
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          sock = _ref[_i];
-          _results.push(sock.emit("update", {
-            messages: addCommas(parseInt(val) + 1000)
-          }));
-        }
-        return _results;
+      _ref = socket_list["1"];
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        sock = _ref[_i];
+        _results.push(sock.emit("update", {
+          messages: addCommas(parseInt(val) + 1000)
+        }));
       }
+      return _results;
     });
     return response.send("true");
   });
@@ -70,7 +75,7 @@
     return console.log("Listening on " + port);
   });
   io.sockets.on("connection", function(socket) {
-    return socket.on("challenge", function(data) {
+    socket.on("challenge", function(data) {
       var key;
       key = data["key"];
       if (!socket_list[data["key"]]) {
@@ -81,5 +86,6 @@
         response: "1"
       });
     });
+    return socket.on('disconnect', function() {});
   });
 }).call(this);
