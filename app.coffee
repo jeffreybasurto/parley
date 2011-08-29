@@ -58,6 +58,7 @@ io.sockets.on "connection", (socket) ->
     key = data["key"]
     socket_list[key] = [] unless socket_list[data["key"]] 
     socket_list[key].push socket
+    console.log(socket_list)
     # subscript to a specific group. 
     
     socket.emit "challenge", {response: "1"}

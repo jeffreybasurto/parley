@@ -78,6 +78,7 @@
         socket_list[key] = [];
       }
       socket_list[key].push(socket);
+      console.log(socket_list);
       return socket.emit("challenge", {
         response: "1"
       });
