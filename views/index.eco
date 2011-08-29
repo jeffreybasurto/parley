@@ -9,6 +9,7 @@
     <script type="text/javascript">
 var socket = io.connect(window.location.hostname);
       socket.on('update', function (data) {
+        console.log("update received");
         $("#messages-sent").text(data["messages"]);
       });
     </script>
