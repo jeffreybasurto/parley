@@ -95,10 +95,17 @@
       }
       socket_list[key].push(socket);
       console.log("Challenge for key:" + key);
-      return socket.emit("challenge", {
-        response: "1"
+      return socket.set('key', key, function() {
+        return socket.emit("challenge", {
+          response: "1"
+        });
       });
     });
-    return socket.on('disconnect', function() {});
+    return socket.on('disconnect', function() {
+      console.log("disconnecting socket.");
+      return socket.get('key', function(err, key) {
+        return socket_list[key].remove(socket);
+      });
+    });
   });
 }).call(this);
