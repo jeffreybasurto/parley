@@ -30,7 +30,7 @@
   app.get('/test', function(request, response) {
     var options, req;
     options = {
-      host: "localhost",
+      host: "http://freezing-mist-544.herokuapp.com/",
       port: port,
       path: '/message',
       method: 'POST'
