@@ -39,6 +39,6 @@ io.sockets.on "connection", (socket) ->
     redis.incr("messages")
     redis.get "messages", (err, val)->
       socket.emit "update", messages: val 
-    response.redirect('/');
+    response.redirect('/test');
   socket.on "my other event", (data) ->
     console.log data
