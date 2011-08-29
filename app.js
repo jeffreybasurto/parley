@@ -50,7 +50,7 @@
     });
   });
   app.post("/message", function(request, response) {
-    console.log(request.body.test);
+    var sock, _i, _len, _ref;
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
@@ -64,6 +64,15 @@
       }
       return _results;
     });
+    if (socket_list[request.body.key]) {
+      _ref = socket_list[request.body.key];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        sock = _ref[_i];
+        sock.emit("update", {
+          messages: request.body.message
+        });
+      }
+    }
     return response.send("true");
   });
   io = require("socket.io").listen(app);
