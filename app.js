@@ -1,16 +1,10 @@
 (function() {
-  var app, fs, handler, io, port;
-  handler = function(req, res) {
-    return fs.readFile(__dirname + "/public/index.html", function(err, data) {
-      if (err) {
-        return res.writeHead(500);
-        return res.end("Error loading index.html");
-      }
-      res.writeHead(200);
-      return res.end(data);
-    });
-  };
-  app = require("http").createServer(handler);
+  var app, express, fs, io, port;
+  express = require('express');
+  app = express.createServer(express.logger());
+  app.get('/', function(request, response) {
+    return response.send('Hello World!');
+  });
   io = require("socket.io").listen(app);
   fs = require("fs");
   io.configure(function() {

@@ -1,14 +1,11 @@
-handler = (req, res) ->
-  fs.readFile __dirname + "/public/index.html", (err, data) ->
-    if err
-      return res.writeHead 500
-      return res.end("Error loading index.html")
-    res.writeHead 200
-    res.end data
+express = require 'express'
+app = express.createServer express.logger()
 
+app.set 'view engine', 'eco'
 
-
-app = require("http").createServer(handler)
+app.get '/', (request, response) -> 
+  response.render 'index'
+  
 io = require("socket.io").listen(app)
 fs = require("fs")
 
