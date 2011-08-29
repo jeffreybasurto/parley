@@ -47,7 +47,7 @@
           messages: val
         });
       });
-      return response.redirect('/');
+      return response.redirect('/test');
     });
     return socket.on("my other event", function(data) {
       return console.log(data);
