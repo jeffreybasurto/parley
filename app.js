@@ -43,7 +43,6 @@
     });
   });
   app.post("/message", function(request, response) {
-    console.log(socket_list);
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
@@ -78,7 +77,6 @@
         socket_list[key] = [];
       }
       socket_list[key].push(socket);
-      console.log(socket_list);
       return socket.emit("challenge", {
         response: "1"
       });
