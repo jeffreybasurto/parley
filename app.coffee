@@ -75,8 +75,6 @@ io.sockets.on "connection", (socket) ->
   socket.on 'disconnect', () ->
     console.log ("disconnecting socket.")
     socket.get 'key', (err, key) -> socket_list[key].remove(socket)
-
-    
-   # socket_list.remove socket
+    # socket_list.remove socket
         
         
