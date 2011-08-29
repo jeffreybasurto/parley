@@ -3,15 +3,23 @@ http = require 'http'
 port = process.env.PORT || 1337;
 app = express.createServer express.logger()
 
+if (process.env.REDISTOGO_URL) 
+  rtg   = require("url").parse(process.env.REDISTOGO_URL)
+  redis = require("redis").createClient(rtg.port, rtg.hostname)
+  redis.auth(rtg.auth.split(":")[1])
+else 
+  redis = require("redis").createClient()
+
+redis.on "error", (err)-> 
+  console.log("Error " + err)
+
 app.set 'view engine', 'eco'
 app.set 'view options', { layout: false }
 
-app.post "/message", (request, response) ->
-  console.log("Posting!!!!")
-  response.send request.body
-
 app.get '/', (request, response) -> 
-  response.render 'index'
+  redis.get "messages", (err, messages) ->
+    console.log(messages)
+    response.render 'index', { messages }
 
 app.get '/test', (request, response) ->
   options = {
@@ -28,7 +36,7 @@ app.get '/test', (request, response) ->
   req.write 'data\n'
   req.write 'data\n'
   req.end()
-  response.send "Thanks."
+  response.send "Message sent."
   
 io = require("socket.io").listen(app)
 fs = require("fs")
@@ -41,6 +49,11 @@ app.listen port, () ->
   console.log("Listening on " + port);
 
 io.sockets.on "connection", (socket) ->
-  socket.emit "update", messages: "1337"
+  app.post "/message", (request, response) ->
+    redis.incr("messages")
+    redis.get "messages", (err, val)->
+      socket.emit "update", messages: val 
+
+    response.send request.body
   socket.on "my other event", (data) ->
     console.log data
