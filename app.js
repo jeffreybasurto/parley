@@ -47,15 +47,17 @@
     redis.incr("messages");
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
-      _ref = socket_list["1"];
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        sock = _ref[_i];
-        _results.push(sock.emit("update", {
-          messages: addCommas(parseInt(val) + 1000)
-        }));
+      if (socket_list["1"]) {
+        _ref = socket_list["1"];
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          sock = _ref[_i];
+          _results.push(sock.emit("update", {
+            messages: addCommas(parseInt(val) + 1000)
+          }));
+        }
+        return _results;
       }
-      return _results;
     });
     return response.send("true");
   });

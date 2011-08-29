@@ -38,7 +38,8 @@ app.post "/message", (request, response) ->
   console.log(socket_list)
   redis.incr("messages")
   redis.get "messages", (err, val)->
-    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
+    if socket_list["1"]
+      sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
   response.send("true")
   
 io = require("socket.io").listen(app)
