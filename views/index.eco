@@ -6,11 +6,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function() {
+        var addCommas;
+        addCommas = function(number) {
+          return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
+        };
         var $messages = $("#messages-sent");
         var socket = io.connect(window.location.hostname);
         socket.emit("challenge", {"key": "1"});
         socket.on('update', function (data) {
-          $messages.text(data["messages"]);
+          $messages.text(addCommas(data["messages"]));
         });
       });
     </script>

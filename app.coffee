@@ -1,8 +1,5 @@
 Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
 
-addCommas = (number) ->
-  return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")
-
 express = require 'express'
 http = require 'http'
 port = process.env.PORT || 1337;
@@ -27,7 +24,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get '/', (request, response) -> 
   redis.get "messages", (err, messages) ->
-    messages = addCommas(parseInt(messages) + 1000)
+    messages = parseInt(messages)
     response.render 'index', { messages }
 
 app.get '/test', (request, response) ->
@@ -41,7 +38,7 @@ app.get '/challenge/:channel', (request, response) ->
 app.post "/message", (request, response) ->
   redis.incrby("messages", 2) # counting message we're delivering to web page that subs all messages.
   redis.get "messages", (err, val)->
-    sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in (socket_list["1"] || [])    
+    sock.emit("update", messages: parseInt(val)) for sock in (socket_list["1"] || [])    
   # we could add the value to a redis queue @ the key for another app to consume.
   # but for simplicty for now let's just act upon it.
   if socket_list[request.body.key]
