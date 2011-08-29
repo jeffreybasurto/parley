@@ -94,6 +94,7 @@
         socket_list[key] = [];
       }
       socket_list[key].push(socket);
+      console.log("Challenge for key:" + key);
       return socket.emit("challenge", {
         response: "1"
       });
