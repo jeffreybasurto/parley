@@ -1,3 +1,5 @@
+Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
+
 addCommas = (number) ->
   return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")
 
@@ -5,6 +7,7 @@ express = require 'express'
 http = require 'http'
 port = process.env.PORT || 1337;
 app = express.createServer express.logger()
+socket_list = []
 
 if (process.env.REDISTOGO_URL) 
   rtg   = require("url").parse(process.env.REDISTOGO_URL)
@@ -33,6 +36,12 @@ app.get '/challenge/:channel', (request, response) ->
   chan = request.params.channel
   response.render 'challenge', { chan }
   
+app.post "/message", (request, response) ->
+  redis.incr("messages")
+  redis.get "messages", (err, val)->
+    sock.emit "update", messages: addCommas(parseInt(val) + 1000) for sock in socket_list
+  response.send("true")
+  
 io = require("socket.io").listen(app)
 fs = require("fs")
 
@@ -44,12 +53,12 @@ app.listen port, () ->
   console.log("Listening on " + port);
 
 io.sockets.on "connection", (socket) ->  
-  app.post "/message", (request, response) ->
-    redis.incr("messages")
-    redis.get "messages", (err, val)->
-      socket.emit "update", messages: addCommas(parseInt(val) + 1000)
-    response.send("true")
+  socket_list.push socket
   # challenge should happen when a new user is connecting to an existing apps channel.
   socket.on "challenge", (data) ->
     socket.emit "challenge", {response: 1}
     
+  socket.on 'disconnect', () ->
+    socket_list.remove socket
+        
+        
