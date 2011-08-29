@@ -48,7 +48,7 @@
   });
   app.post("/message", function(request, response) {
     var sock, _i, _len, _ref;
-    redis.incrby("messages", 1 + (socket_list["1"] || []).length());
+    redis.incrby("messages", 2);
     redis.get("messages", function(err, val) {
       var sock, _i, _len, _ref, _results;
       _ref = socket_list["1"] || [];
