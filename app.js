@@ -30,7 +30,7 @@
   app.get('/test', function(request, response) {
     var options, req;
     options = {
-      host: "http://freezing-mist-544.herokuapp.com/",
+      host: "http://freezing-mist-544.herokuapp.com",
       port: port,
       path: '/message',
       method: 'POST'
@@ -57,6 +57,12 @@
   });
   io.sockets.on("connection", function(socket) {
     app.post("/message", function(request, response) {
+      redis.incr("messages");
+      redis.get("messages", function(err, val) {
+        return socket.emit("update", {
+          messages: val
+        });
+      });
       return response.send(request.body);
     });
     return socket.on("my other event", function(data) {
