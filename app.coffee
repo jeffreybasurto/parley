@@ -39,10 +39,15 @@ app.get '/challenge/:channel', (request, response) ->
   response.render 'challenge', { chan }
   
 app.post "/message", (request, response) ->
-  console.log(request.body.test)
   redis.incr("messages")
   redis.get "messages", (err, val)->
     sock.emit("update", messages: addCommas(parseInt(val) + 1000)) for sock in socket_list["1"]
+    
+  # we could add the value to a redis queue @ the key for another app to consume.
+  # but for simplicty for now let's just act upon it.
+  if socket_list[request.body.key]
+    sock.emit("update", messages: request.body.message) for sock in socket_list[request.body.key]
+  
   response.send("true")
   
 io = require("socket.io").listen(app)
