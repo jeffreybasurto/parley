@@ -1,7 +1,7 @@
 (function() {
   var app, fs, handler, io, port;
   handler = function(req, res) {
-    return fs.readFile(__dirname + "/index.html", function(err, data) {
+    return fs.readFile(__dirname + "/public/index.html", function(err, data) {
       if (err) {
         return res.writeHead(500);
         return res.end("Error loading index.html");

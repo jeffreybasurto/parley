@@ -1,5 +1,5 @@
 handler = (req, res) ->
-  fs.readFile __dirname + "/index.html", (err, data) ->
+  fs.readFile __dirname + "/public/index.html", (err, data) ->
     if err
       return res.writeHead 500
       return res.end("Error loading index.html")
