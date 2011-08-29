@@ -62,7 +62,6 @@
       return _results;
     });
     if (socket_list[request.body.key]) {
-      redis.incrby("messages", socket_list[request.body.key].length());
       _ref = socket_list[request.body.key];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         sock = _ref[_i];
