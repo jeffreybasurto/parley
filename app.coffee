@@ -22,20 +22,6 @@ app.get '/', (request, response) ->
     response.render 'index', { messages }
 
 app.get '/test', (request, response) ->
-  options = {
-    host: "http://freezing-mist-544.herokuapp.com",
-    port: port,
-    path: '/message',
-    method: 'POST'
-  }
-  req = http.request options, (res) -> 
-    res.setEncoding('utf8');
-    res.on 'data', (chunk) ->
-      console.log 'BODY: ' + chunk
-
-  req.write 'data\n'
-  req.write 'data\n'
-  req.end()
   response.send "Message sent."
   
 io = require("socket.io").listen(app)
