@@ -61,7 +61,9 @@
       }
       return _results;
     });
-    redis.publish("message_channel", request.body.message);
+    redis.publish("message_channel", JSON.stringify({
+      data: request.body.message
+    }));
     _ref = socket_list[request.body.key] || [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       sock = _ref[_i];

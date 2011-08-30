@@ -40,7 +40,7 @@ app.post "/message", (request, response) ->
   redis.get "messages", (err, val)->
     sock.emit("update", messages: parseInt(val)) for sock in (socket_list["1"] || [])    
     
-  redis.publish("message_channel", request.body.message)
+  redis.publish("message_channel", JSON.stringify({data:request.body.message}))
   # we could add the value to a redis queue @ the key for another app to consume.
   # but for simplicty for now let's just act upon it.
   sock.emit("update", messages: request.body.message) for sock in (socket_list[request.body.key] || [])    
