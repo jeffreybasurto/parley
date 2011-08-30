@@ -1,16 +1,9 @@
 (function() {
-  var app, express, fs, http, io, port, redis, rtg, socket_list;
-  Array.prototype.remove = function(e) {
-    var t, _ref;
-    if ((t = this.indexOf(e)) > -1) {
-      return ([].splice.apply(this, [t, t - t + 1].concat(_ref = [])), _ref);
-    }
-  };
+  var app, express, http, port, redis, rtg;
   express = require('express');
   http = require('http');
   port = process.env.PORT || 1337;
   app = express.createServer(express.logger());
-  socket_list = {};
   app.use(express.bodyParser());
   if (process.env.REDISTOGO_URL) {
     rtg = require("url").parse(process.env.REDISTOGO_URL);
@@ -48,18 +41,6 @@
   });
   app.post("/message", function(request, response) {
     var sock, _i, _len, _ref;
-    redis.get("messages", function(err, val) {
-      var sock, _i, _len, _ref, _results;
-      _ref = socket_list["1"] || [];
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        sock = _ref[_i];
-        _results.push(sock.emit("update", {
-          messages: parseInt(val)
-        }));
-      }
-      return _results;
-    });
     redis.lpush("1", request.body.message);
     redis.publish("1", "ready");
     _ref = socket_list[request.body.key] || [];
@@ -71,37 +52,7 @@
     }
     return response.send("true");
   });
-  io = require("socket.io").listen(app);
-  fs = require("fs");
-  io.configure(function() {
-    io.set("transports", ["xhr-polling"]);
-    return io.set("polling duration", 10);
-  });
   app.listen(port, function() {
     return console.log("Listening on " + port);
-  });
-  io.sockets.on("connection", function(socket) {
-    socket.on("challenge", function(data) {
-      var key;
-      key = data["key"];
-      if (!socket_list[data["key"]]) {
-        socket_list[key] = [];
-      }
-      socket_list[key].push(socket);
-      console.log("Challenge for key:" + key);
-      return socket.set('key', key, function() {
-        return socket.emit("challenge", {
-          response: "1"
-        });
-      });
-    });
-    return socket.on('disconnect', function() {
-      console.log("disconnecting socket.");
-      return socket.get('key', function(err, key) {
-        if (key && socket_list[key]) {
-          return socket_list[key].remove(socket);
-        }
-      });
-    });
   });
 }).call(this);

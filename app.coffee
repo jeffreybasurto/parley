@@ -1,10 +1,8 @@
-Array::remove = (e) -> @[t..t] = [] if (t = @indexOf(e)) > -1
 
 express = require 'express'
 http = require 'http'
 port = process.env.PORT || 1337;
 app = express.createServer express.logger()
-socket_list = {}
 
 app.use(express.bodyParser());
 
@@ -35,10 +33,7 @@ app.get '/challenge/:channel', (request, response) ->
   chan = request.params.channel
   response.render 'challenge', { chan }
   
-app.post "/message", (request, response) ->
-  redis.get "messages", (err, val)->
-    sock.emit("update", messages: parseInt(val)) for sock in (socket_list["1"] || [])    
-    
+app.post "/message", (request, response) ->    
   redis.lpush("1", request.body.message)
   # publish based on the secrety key.  1 for testing for now TODO
   redis.publish("1", "ready")
@@ -47,29 +42,9 @@ app.post "/message", (request, response) ->
   sock.emit("update", messages: request.body.message) for sock in (socket_list[request.body.key] || [])    
   response.send("true")
   
-io = require("socket.io").listen(app)
-fs = require("fs")
-
-io.configure () ->  
-  io.set "transports", ["xhr-polling"] 
-  io.set "polling duration", 10
 
 app.listen port, () -> 
   console.log("Listening on " + port);
 
-io.sockets.on "connection", (socket) ->  
-  # challenge should happen when a new user is connecting to an existing apps channel.
-  socket.on "challenge", (data) ->
-    key = data["key"]
-    socket_list[key] = [] unless socket_list[data["key"]] 
-    socket_list[key].push socket
-    # subscript to a specific group. 
-    console.log("Challenge for key:" + key)
-    socket.set 'key', key,  () -> socket.emit "challenge", {response: "1"}
-    
-  socket.on 'disconnect', () ->
-    console.log ("disconnecting socket.")
-    socket.get 'key', (err, key) -> socket_list[key].remove(socket) if key && socket_list[key]
-    # socket_list.remove socket
         
         
