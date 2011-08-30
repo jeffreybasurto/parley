@@ -60,7 +60,6 @@
       }
       return _results;
     });
-    redis.lpush("1", request.body.message);
     redis.publish("1", "ready");
     _ref = socket_list[request.body.key] || [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
