@@ -39,7 +39,7 @@ app.post "/message", (request, response) ->
   redis.get "messages", (err, val)->
     sock.emit("update", messages: parseInt(val)) for sock in (socket_list["1"] || [])    
     
-  #redis.lpush("1", request.body.message)
+  redis.lpush("1", request.body.message)
   # publish based on the secrety key.  1 for testing for now TODO
   redis.publish("1", "ready")
   # we could add the value to a redis queue @ the key for another app to consume.
