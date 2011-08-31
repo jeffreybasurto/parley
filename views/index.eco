@@ -51,7 +51,7 @@
             </div></div>
 
         <div class="page shown" id="introduction">    
-            <div class="column">
+            <div class="column" style="550px;">
                 <h1>
                     Add realtime events to your app
                 </h1>
@@ -72,8 +72,7 @@
         </div>
 
         <div class="page" id="pricing">    
-            <div class="column" style="width:800px;">
-                Page describing pricing.
+            <div class="column">
             </div>
         </div>
     </div>
