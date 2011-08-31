@@ -51,7 +51,7 @@
             </div></div>
 
         <div class="page shown" id="introduction">    
-            <div class="column" style="width:350px;">
+            <div class="column">
                 <h1>
                     Add realtime events to your app
                 </h1>
