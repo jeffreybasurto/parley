@@ -1,44 +1,159 @@
+
+
+#nav-left {
+    background: url(http://www.elegantthemes.com/preview/Envisioned/wp-content/themes/Envisioned/images/left-menu-bg.png) no-repeat top left;
+    padding-left: 11px;
+    height: 49px;   
+}
+
+#nav { 
+    margin-bottom: 55px;    
+    background: url(http://www.elegantthemes.com/preview/Envisioned/wp-content/themes/Envisioned/images/content-menu-bg.png) repeat-x;
+    height: 49px;
+}
+ul#nav-buttons {
+    margin:20px;
+    padding:0;
+    list-style:none;
+    width:525px;
+}
+ul#nav-buttons li {
+    display:inline;
+}
+
+ul#nav-buttons li a {
+    text-decoration:none;
+    padding:16px 0;
+    width:100px;
+    color:#eee;
+    float:left;
+    text-align:center;
+    border-left:0px solid #fff;
+    text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8);
+    font-family: 'Droid Sans', Arial, sans-serif;
+    
+}
+
+
+html { height: 100%; }
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin:2px 0px; padding:0px;
+    height: 100%;
+    background: #8EC7D0 url(http://www.elegantthemes.com/preview/Feather/wp-content/themes/Feather/images/body-bg.png)
+}
+
+
+
+#viewing-area { 
+    width: 800px;
+    margin:0px auto;
+    margin-top: 54px;   
+}
+
+#logo {
+    position:relative;
+    margin-right: 32px;
+
+    font-family: Georgia, serif;
+    vertical-align: baseline;
+    display:inline-block;
+}
+#logo img {
+}
+#logo > span {
+    position:absolute;
+    opacity: 0.3;
+    bottom: -15px;
+    right: -30px;
+    color:black;
+    font-size: 12px;
+}
+.page {
+}
+
+.button {
+    opacity: 0.8;
+    border-radius: 10px;
+    position:relative;
+    bottom: 0;
+    display:inline-block;
+    height:33px; 
+    border : 1px solid #666;
+    color: white;
+    text-align:center;
+    text-decoration:  none;
+    font-weight: bold;
+    -webkit-transition: background-color 0.2s linear;  
+    -moz-transition: background-color 0.2s linear;  
+    -o-transition: background-color 0.2s linear;  
+    -webkit-transition: height 0.2s linear;  
+    -moz-transition: height 0.2s linear;  
+    -o-transition: height 0.2s linear; 
+    
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
 #messages-container {
-   overflow: hidden;
-   -moz-border-radius: 50px;
-   -webkit-border-radius: 50px;
-   -o-border-radius: 50px;
-   -ms-border-radius: 50px;
-   -khtml-border-radius: 50px;
-   border-radius: 50px;
-   background: white;
-   background: -moz-linear-gradient(top, white, #DDD);
-   background: -ms-linear-gradient(top, white, #DDD);
-   background: -o-linear-gradient(top, white, #DDD);
-   background: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #DDD));
-   background: -webkit-linear-gradient(top, white, #DDD);
-   background: linear-gradient(top, white, #DDD);
-   border: 1px solid #CCC;
-   font-family: "VAG Rundschrift Regular", "Helvetica Neue", sans-serif;
-   padding: 5px 30px;
-   padding-bottom: 11px;
-   margin-bottom: 20px;
-   display: inline-block;
+    overflow: hidden;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -o-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -khtml-border-radius: 50px;
+    border-radius: 50px;
+    background: white;
+    background: -moz-linear-gradient(top, white, #DDD);
+    background: -ms-linear-gradient(top, white, #DDD);
+    background: -o-linear-gradient(top, white, #DDD);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #DDD));
+    background: -webkit-linear-gradient(top, white, #DDD);
+    background: linear-gradient(top, white, #DDD);
+    border: 1px solid #CCC;
+    font-family: "VAG Rundschrift Regular", "Helvetica Neue", sans-serif;
+    padding: 5px 30px;
+    padding-bottom: 11px;
+    margin-bottom: 20px;
+    display: inline-block;
 }
 #messages-container p {
-  float: right;
-  padding: 0;
-  margin: 0;
-  font-size: 0.9em;
-  padding-top: 8px;
-  font-style: normal;
-  color: #BBB;
-  text-transform: uppercase;
-  line-height: 1.1;
-  padding-left: 10px;
+    float: right;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    padding-top: 8px;
+    font-style: normal;
+    color: #BBB;
+    text-transform: uppercase;
+    line-height: 1.1;
+    padding-left: 10px;
 }
 #messages-sent {
-  float: left;
-  font-size: 2.4em;
-  padding: 0;
+    float: left;
+    font-size: 2.4em;
+    padding: 0;
+    color: black;
 }
 
 .column {
-  width:500px;
-  text-align: left;
+    padding: 30px;
+    margin-top: 30px;
 }
+
+
+.button span { position:relative;top:7px; padding:6px;}
+
+.selected {background-color: #1dacef;}
+
+.button:not(.selected) {  background-color: #1996d0; }
+.button.selected {  background-color: #69cfff; }
+.button:hover {  background-color: #1dacef;}
+.button:active {  background-color: #69cfff;   }
+
+#talent-reset-button {background-color: #ed1f24;}
+#talent-reset-button:hover   {  background-color: #FF3333; }
+#talent-reset-button:active   {  background-color: #FF6600; }
+

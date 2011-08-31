@@ -27,22 +27,55 @@
     <title></title>
   </head>
   <body>
-    <div class="column">
-      <h1>
-         Add <b>realtime</b> events to your app
-      </h1>
-      <p>
-        Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via web technology to desktop and mobile apps.
-      </p>
-      <div id="messages-container">
-        <div id="messages-sent">
-          <%= @messages %>
+    
+    
+    <div id="viewing-area">
+        <div id="logo">
+            <img src="http://s2.postimage.org/1lc65r2w4/parleylogo.png">
+            <span>
+                <span>par·ley [pahr-lee]<span><br>
+                <span>• to speak, talk, or confer.</span>
+            </span>
         </div>
-        <p>
-          messages<br>
-          delivered
-        </p>
-      </div>
+
+
+        <div id="nav-left"><div id="nav-right">
+            <div id="nav">
+                <ul id="nav-buttons">
+                    <li><a href="#" data-page="introduction">Why Parley?</a></li>
+                    <li><a href="#" data-page="pricing">Pricing</a></li>
+                    <li><a href="#" data-page="demos">Demos</a></li>
+                    <li><a href="#" data-page="login">Login</a></li>
+                </ul>
+            </div>
+            </div></div>
+
+        <div class="page shown" id="introduction">    
+            <div class="column" style="width:350px;">
+                <h1>
+                    Add realtime events to your app
+                </h1>
+                <p>
+                    Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via web technology to desktop and mobile apps.
+                </p>
+                <div id="messages-container">
+                  <div id="messages-sent">
+                    <%= @messages %>
+                  </div>
+                  <p>
+                    messages<br>
+                    delivered
+                  </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="page" id="pricing">    
+            <div class="column" style="width:800px;">
+                Page describing pricing.
+            </div>
+        </div>
     </div>
   </body>
 </html>
