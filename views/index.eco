@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function() {
+        var messages_received = 0;
         var addCommas;
         addCommas = function(number) {
           return number.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
@@ -20,8 +21,14 @@
         
         socket.emit("challenge", {"key": "1"});
         socket.on('update', function (data) {
+          messages_received += 1;
           throttled(data["messages"]);
         });
+        
+        setInterval(function() {
+          $("#ave").text(messages_received);
+          messages_received = 0;
+        }, 1000);
       });
     </script>
     <title></title>
@@ -66,6 +73,9 @@
                     messages<br>
                     delivered
                   </p>
+                </div>
+                <div>
+                  throughput: <span id="ave">0</span>
                 </div>
             </div>
 
