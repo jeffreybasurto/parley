@@ -71,7 +71,7 @@
         <div id="nav-left"><div id="nav-right">
             <div id="nav">
                 <ul id="nav-buttons">
-                    <li><a href="#" data-page="introduction">Why Parley?</a></li>
+                    <li><a href="#" class="selected" data-page="introduction">Why Parley?</a></li>
                     <li><a href="#" data-page="pricing">Pricing</a></li>
                     <li><a href="#" data-page="demos">Demos</a></li>
                     <li><a href="#" data-page="login">Login</a></li>
