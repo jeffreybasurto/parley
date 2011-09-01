@@ -30,6 +30,23 @@
           messages_received = 0;
         }, 1000);
       });
+      
+      $(function() {
+          $(".page").hide();
+          $(".page.shown").show();
+          $("#nav-buttons a").click(function() {
+              var $this = $(this);
+              $(".selected").removeClass("selected");
+              $this.addClass("selected");
+
+              $(".page.shown").fadeOut("slow", function() {
+                  $("#" + $this.attr("data-page")).fadeIn("slow").addClass("shown");
+              }).removeClass("shown");
+              return false;
+
+          });
+
+      });
     </script>
     <title></title>
   </head>
@@ -39,12 +56,11 @@
     <div id="viewing-area">
         <div id="logo">
             <img src="http://s2.postimage.org/1lc65r2w4/parleylogo.png">
-            <span>
-                <span>par·ley [pahr-lee]<span><br>
+            <div>
+                <span>par·ley [pahr-lee]</span><br>
                 <span>• to speak, talk, or confer.</span>
-            </span>
+            </div>
         </div>
-
 
         <div id="nav-left"><div id="nav-right">
             <div id="nav">
@@ -55,10 +71,11 @@
                     <li><a href="#" data-page="login">Login</a></li>
                 </ul>
             </div>
-            </div></div>
+            </div>
+        </div>
 
         <div class="page shown" id="introduction">    
-            <div class="column" style="550px;">
+            <div class="column" style="width:350px;">
                 <h1>
                     Add realtime events to your app
                 </h1>
@@ -66,23 +83,32 @@
                     Parley is a hosted API for quickly, easily and securely adding scalable realtime functionality via web technology to desktop and mobile apps.
                 </p>
                 <div id="messages-container">
-                  <div id="messages-sent">
-                    <%= @messages %>
-                  </div>
-                  <p>
-                    messages<br>
-                    delivered
-                  </p>
-                </div>
-                <div>
-                  throughput: <span id="ave">0</span>
+                    <div id="messages-sent">
+                        1,203,000
+                    </div>
+                    <p>
+                        messages<br>
+                        delivered
+                    </p>
                 </div>
             </div>
 
         </div>
 
         <div class="page" id="pricing">    
-            <div class="column">
+            <div class="column" style="width:800px;">
+                Page describing pricing.
+            </div>
+        </div>
+
+        <div class="page" id="demos">    
+            <div class="column" style="width:800px;">
+                Page with demos.
+            </div>
+        </div>
+        <div class="page" id="login">    
+            <div class="column" style="width:800px;">
+                Page for login.
             </div>
         </div>
     </div>

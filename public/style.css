@@ -1,10 +1,9 @@
 
-
 #nav-left {
     background: url(http://www.elegantthemes.com/preview/Envisioned/wp-content/themes/Envisioned/images/left-menu-bg.png) no-repeat top left;
     padding-left: 11px;
+    margin-top: 35px;
     height: 49px;   
-    margin-top: 40px;
 }
 
 #nav { 
@@ -55,14 +54,14 @@ body {
 #logo {
     position:relative;
     margin-right: 32px;
-
+    
     font-family: Georgia, serif;
     vertical-align: baseline;
     display:inline-block;
 }
 #logo img {
 }
-#logo > span {
+#logo > div {
     position:absolute;
     opacity: 0.3;
     bottom: -15px;
@@ -156,4 +155,3 @@ body {
 #talent-reset-button {background-color: #ed1f24;}
 #talent-reset-button:hover   {  background-color: #FF3333; }
 #talent-reset-button:active   {  background-color: #FF6600; }
-
