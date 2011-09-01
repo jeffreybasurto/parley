@@ -36,15 +36,21 @@
           $(".page.shown").show();
           $("#nav-buttons a").click(function() {
               var $this = $(this);
+              var $shown = $(".page.shown");
+              var $to_show = $("#" + $this.attr("data-page"));
               $(".selected").removeClass("selected");
-              $this.addClass("selected");
+              $this.addClass("selected");     
 
-              $(".page.shown").fadeOut("slow", function() {
-                  $("#" + $this.attr("data-page")).fadeIn("slow").addClass("shown");
-              }).removeClass("shown");
+
+              $(".page").stop(true, true).stop(false, true);
+              $(".page").hide();
+
+              $to_show.addClass("shown");
+              $shown.removeClass("shown").fadeOut("slow", function() {
+                $to_show.fadeIn("slow");
+              });
               return false;
-
-          });
+         });
 
       });
     </script>
